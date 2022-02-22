@@ -1,0 +1,6 @@
+todo
+- [ ] placing bugs in hexes
+- [ ] open adjacent hexes when a bug is placed
+- [ ] code comments for previous two items
+- [ ] moving a bug from one hex to another
+- [ ] update adjacent hexes when a bug is moved

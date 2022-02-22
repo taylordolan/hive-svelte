@@ -1,26 +1,30 @@
 <script>
   import Hex from "./Hex.svelte";
-  const colCount = 45;
-	const rowCount = 45;
+  import Player from "./Player.svelte";
+  import { board, white, black, holding } from './stores.js';
 
-  let board = [];
-  for (let x = 0; x < colCount; x++) {
-    board[x] = [];
-    for (let y = 0; y < rowCount; y++) {
-      board[x][y] = {
-        x: x,
-        y: y,
-        content: [],
-        status: "none",
-      };
+  const setHeldBug = (player, bug) => {
+    if (!$holding && player.bugs[bug]) {
+      player.bugs[bug]--;
+      $holding = bug;
     }
   }
-  board[23][23].status = "open";
+
+  // const placeHeldBug = (x, y) => {
+  //   if ($holding) {
+  //     $board[x][y].content.push(holding);
+  //     // board[x][y].status = "filled";
+  //     $holding = null;
+  //     openAdjacentHexes(x, y);
+  //   }
+  // }
 </script>
 
 <main>
+  <Player player={$white} {setHeldBug}/>
+  <Player player={$black} {setHeldBug}/>
 	<div id="board">
-    {#each board as col, x}
+    {#each $board as col, x}
       <div
         class:shift-up = "{x % 2 === 0}"
         class:shift-down = "{x % 2 !== 0}"
@@ -31,8 +35,6 @@
       </div>
     {/each}
   </div>
-  <!-- <div id="white" class="player"></div> -->
-  <!-- <div id="black" class="player"></div> -->
 </main>
 
 <style>

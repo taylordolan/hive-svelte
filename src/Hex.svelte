@@ -2,7 +2,6 @@
   export let x;
   export let y;
   export let status;
-  export let content;
 </script>
 
 <div class="hex-wrapper {status}" data-x={x} data-y={y}>
