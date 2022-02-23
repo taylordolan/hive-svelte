@@ -1,21 +1,22 @@
-import { writable } from 'svelte/store';
+import { writable, readable } from 'svelte/store';
 
 // board setup
-const size = 45; // the number of rows and columns
+const s = 45; // the number of rows and columns
 let b = [];
-for (let x = 0; x < size; x++) {
+for (let x = 0; x < s; x++) {
   b[x] = [];
-  for (let y = 0; y < size; y++) {
+  for (let y = 0; y < s; y++) {
     b[x][y] = {
       x: x,
       y: y,
-      content: [],
       status: "none",
+      content: [],
     };
   }
 }
-b[Math.floor(size/2)][Math.floor(size/2)].status = "open";
+b[Math.floor(s/2)][Math.floor(s/2)].status = "open";
 
+export const size = readable(s);
 export const board = writable(b);
 export const white = writable({
   color: "white",

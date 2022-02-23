@@ -1,12 +1,19 @@
 <script>
   export let player;
-  export let setHeldBug;
+  import { holding } from './stores.js';
+
+  const setHeldBug = (player, bug) => {
+    if (!$holding && player.bugs[bug]) {
+      player.bugs[bug]--;
+      $holding = bug;
+    }
+  }
 </script>
 
 <div id={player.color} class="player">
   {#each Object.entries(player.bugs) as bug}
     <button on:click = {() => {
-      setHeldBug(player, bug[0])
+      setHeldBug(player, bug[0]);
       player = player;
     }
     }>{bug[1]} {player.color} {bug[0]}</button>

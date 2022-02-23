@@ -1,28 +1,12 @@
 <script>
   import Hex from "./Hex.svelte";
   import Player from "./Player.svelte";
-  import { board, white, black, holding } from './stores.js';
-
-  const setHeldBug = (player, bug) => {
-    if (!$holding && player.bugs[bug]) {
-      player.bugs[bug]--;
-      $holding = bug;
-    }
-  }
-
-  // const placeHeldBug = (x, y) => {
-  //   if ($holding) {
-  //     $board[x][y].content.push(holding);
-  //     // board[x][y].status = "filled";
-  //     $holding = null;
-  //     openAdjacentHexes(x, y);
-  //   }
-  // }
+  import { board, white, black } from './stores.js';
 </script>
 
 <main>
-  <Player player={$white} {setHeldBug}/>
-  <Player player={$black} {setHeldBug}/>
+  <Player player={$white}/>
+  <Player player={$black}/>
 	<div id="board">
     {#each $board as col, x}
       <div
