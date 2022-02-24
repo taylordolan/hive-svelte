@@ -1,22 +1,27 @@
 <script>
-  export let player;
+  export let player; // instance needs to know whether to modify black or white player
   import { holding } from './stores.js';
 
-  const setHeldBug = (player, bug) => {
-    if (!$holding && player.bugs[bug]) {
-      player.bugs[bug]--;
-      $holding = bug;
+  const setHeldBug = (bugGroup) => {
+    const bugType = bugGroup[0];
+    if (!$holding && player.bugs[bugType] > 0) {
+      $holding = bugType;
+      player.bugs[bugType]--;
     }
+  }
+
+  const renderButtonText = (bugGroup) => {
+    const bugType = bugGroup[0];
+    const bugCount = bugGroup[1];
+    return bugCount + " " + player.color + " " + bugType
   }
 </script>
 
 <div id={player.color} class="player">
-  {#each Object.entries(player.bugs) as bug}
-    <button on:click = {() => {
-      setHeldBug(player, bug[0]);
-      player = player;
-    }
-    }>{bug[1]} {player.color} {bug[0]}</button>
+  {#each Object.entries(player.bugs) as bugGroup}
+  <button on:click={setHeldBug(bugGroup)}>
+    {renderButtonText(bugGroup)}
+  </button>
   {/each}
 </div>
 

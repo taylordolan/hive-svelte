@@ -14,6 +14,8 @@ for (let x = 0; x < s; x++) {
     };
   }
 }
+
+// open center tile for first bug to be placed
 b[Math.floor(s/2)][Math.floor(s/2)].status = "open";
 
 export const size = readable(s);
