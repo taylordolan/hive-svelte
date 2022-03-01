@@ -22,10 +22,10 @@ export const size = readable(s);
 export const board = writable(b);
 export const white = writable({
   color: "white",
-  bugs: { a: 3, b: 2, g: 3, q: 1, s: 2 },
+  bugs: { ant: 3, beetle: 2, grasshopper: 3, queen: 1, spider: 2 },
 });
 export const black = writable({
   color: "black",
-  bugs: { a: 3, b: 2, g: 3, q: 1, s: 2 },
+  bugs: { ant: 3, beetle: 2, grasshopper: 3, queen: 1, spider: 2 },
 });
 export const holding = writable(null);

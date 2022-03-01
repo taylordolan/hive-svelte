@@ -5,7 +5,7 @@
   const setHeldBug = (bugGroup) => {
     const bugType = bugGroup[0];
     if (!$holding && player.bugs[bugType] > 0) {
-      $holding = bugType;
+      $holding = player.color + " " + bugType;
       player.bugs[bugType]--;
     }
   }

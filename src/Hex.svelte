@@ -8,8 +8,7 @@
   const placeHeldBug = (x, y) => {
     if ($holding) {
       $board[x][y].content.push($holding);
-      console.log($holding)
-      // board[x][y].status = "filled";
+      $board[x][y].status = "filled";
       $holding = null;
       openAdjacentHexes(x, y);
     }
@@ -95,42 +94,47 @@
   }
 </script>
 
-<div class="hex-wrapper {status}" data-x={x} data-y={y}>
-  <svg on:click={placeHeldBug(x,y)} class="hex" viewBox="0 0 115.5 100">
+{#if (status != "none")}
+<div class="hex-wrapper" data-x={x} data-y={y}>
+  <svg on:click={placeHeldBug(x,y)} class="hex {status}" viewBox="0 0 115.5 100">
     <polygon points="29 0 0 50 29 100 86.51 100 115.5 50 86.51 0 29 0"></polygon>
   </svg>
   {#if content.length}
     {content[0]}
   {/if}
 </div>
+{/if}
 
 <style>
   .hex-wrapper {
-    display: flex;
     align-items: center;
+    display: flex;
     height: 100px;
     justify-content: center;
     margin: 0 -14.5px;
     position: relative;
+    text-align: center;
     width: 115.5px;
   }
 
-  .hex-wrapper.none {
-    display: none;
-  }
-
   .hex {
-    width: 100%;
+    cursor: pointer;
+    fill: transparent;
     height: 100%;
     overflow: visible;
     position: absolute;
-    fill: transparent;
-    stroke: transparent;
     stroke-width: 2px;
-    cursor: pointer;
+    stroke: transparent;
+    width: 100%;
   }
 
-  .hex-wrapper.open .hex {
+  .hex.open {
     stroke: #ddd;
+    z-index: 0;
+  }
+
+  .hex.filled {
+    stroke: #aaa;
+    z-index: 1;
   }
 </style>
